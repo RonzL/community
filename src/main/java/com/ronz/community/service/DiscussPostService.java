@@ -52,5 +52,15 @@ public class DiscussPostService {
         discussPostMapper.insertDiscussPost(discussPost);
     }
 
+    /**
+     * 根据文章 ID 查询文章
+     */
+    public DiscussPost selectDiscussPostById(int id){
+        return discussPostMapper.selectDiscussPostById(id);
+    }
+
+    public void updateDiscussPostCommentCount(int id, int commentCount){
+        discussPostMapper.updateDiscussPostCommentCount(id, commentCount);
+    }
 }
 

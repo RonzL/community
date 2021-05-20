@@ -30,4 +30,15 @@ public interface DiscussPostMapper {
      * 增加文章到数据库中
      */
     void insertDiscussPost(DiscussPost discussPost);
+
+    /**
+     * 根据文章 ID 查询文章
+     */
+    DiscussPost selectDiscussPostById(int id);
+
+    /**
+     * 根据文章 ID 更新文章评论数量
+     */
+    int updateDiscussPostCommentCount(int id, int commentCount);
+
 }

@@ -13,7 +13,14 @@ public enum CommonConstant {
     REMEMBER_EXPIRED_SECONDS(3600 * 24 * 100, "凭证有效期为 100 天"),
 
     LOGIN_TICKED_VALID(0, "登录凭证有效！"),
-    LOGIN_TICKED_INVALID(1, "登录凭证无效！");
+    LOGIN_TICKED_INVALID(1, "登录凭证无效！"),
+
+    ENTITY_TYPE_POST(1, "讨论帖的评论"),
+    ENTITY_TYPE_REPLY(2, "楼层回复"),
+
+    MESSAGE_UNREAD(0, "未读消息"),
+    MESSAGE_READED(1, "已读消息"),
+    MESSAGE_DELETED(2, "已删除消息");
 
     private int code;
     private String msg;
