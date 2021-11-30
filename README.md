@@ -4,34 +4,58 @@
 基于 SpringBoot 实现的 NEU 社区。
 
 #### 软件架构
-软件架构说明
+* Spring Boot 2.4.4
+* MyBatis 2.0.1
+* Spring 5.3.5
+* Spring MVC 5.3.5
+* Spring Security 5.3.0.4.RELEASE
+* Redis 3.2.100
+* Caffeine 2.8.8
+* Kafka 2.13-2.8.0
+* ElasticSearch 7.9.3
+* Quartz 2.4.4
+* Tomcat 9
 
+#### 部署教程
+以下部署步骤都是在 CentOS 7 上进行。
 
-#### 安装教程
+1.  首先在待部署主机上安装好所有的环境；
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+2.  在项目根路径下将项目打包：
+    ```shell
+    mvn clean package -Dmaven.test.skip=true
+    ```
+    打包完成会在项目的 `target` 目录下生成 `ROOT.war` 文件；
 
-#### 使用说明
+3.  将生成的文件移动到 Tomcat 目录下的  `webapp` 目录下，然后删除该目录下的 `ROOT` 文件夹；
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+4.  启动 Kafka。
 
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+    进入 kafka 的根目录下。首先启动 zookeeper：
+    ```shell
+    bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
+    ```
+    然后启动 kafka：
+    ```shell
+    nohup bin/kafka-server-start.sh config/server.properties 1>/dev/null 2>&1 &
+    ```
+5.  启动 ElasticSearch。
+ 
+    由于 ElasticSearch 不能以 root 用户运行，所以需要添加一个新用户：
+    ```shell
+    groupadd es
+    useradd es1 -p 123456 -g es
+    chown -R es1:es ./elasticsearch/*
+    chown -R es1:es /tmp/*
+    ```
+    然后进入 ElasticSearch 的 `bin` 目录运行 ElasticSearch：
+    ```shell
+    ./elasticsearch -d
+    ```
+    
+6.  启动 Tomcat：
+    
+    进入 Tomcat 的 `bin` 目录，运行启动脚本：
+    ```shell
+    ./startup.sh
+    ```
