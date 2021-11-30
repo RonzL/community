@@ -40,7 +40,7 @@
     nohup bin/kafka-server-start.sh config/server.properties 1>/dev/null 2>&1 &
     ```
 5.  启动 ElasticSearch。
- 
+
     由于 ElasticSearch 不能以 root 用户运行，所以需要添加一个新用户：
     ```shell
     groupadd es
@@ -59,3 +59,7 @@
     ```shell
     ./startup.sh
     ```
+
+#### 相关资源
+
+本项目的数据库初始化 SQL 文件在仓库的 `community-init-sql` 路径下。
